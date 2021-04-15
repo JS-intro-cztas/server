@@ -11,6 +11,7 @@ class StorageService {
         let file = {};
 
         try {
+            this.ensureDataDirExists();
             file = JSON.parse(fs.readFileSync(this.getStorageLocation()).toString());
         } catch(e) {
             fs.writeFileSync(this.getStorageLocation(), JSON.stringify({}));
@@ -23,11 +24,18 @@ class StorageService {
     }
 
     saveStorage() {
+        this.ensureDataDirExists();
         fs.writeFileSync(this.getStorageLocation(), JSON.stringify(this._storage));
     }
 
-    getStorageLocation() {
-        return path.join(__dirname, '..', 'data', 'storage.json');
+    getStorageLocation(entire = true) {
+        return path.join(__dirname, '..', 'data', entire ? 'storage.json' : '');
+    }
+
+    ensureDataDirExists() {
+        if (!fs.existsSync(this.getStorageLocation(false))) {
+            fs.mkdirSync(this.getStorageLocation(false));
+        }
     }
 
     static getInstance() {
