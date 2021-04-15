@@ -12,7 +12,7 @@ router.get('', (req, res) => {
     }
 
     const token = req.query.token;
-    const hasToken = storageService.storage.users?.hasOwnProperty(token);
+    const hasToken = storageService.storage.users && storageService.storage.users.hasOwnProperty(token);
     if (!hasToken) {
         res.status(400);
         res.end({ error: 'No such user', msg: 'Token not found' })
