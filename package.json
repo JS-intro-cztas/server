@@ -3,9 +3,10 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js -p 3000"
   },
   "dependencies": {
+    "args": "^5.0.1",
     "body-parser": "^1.19.0",
     "debug": "~2.6.9",
     "express": "~4.16.1",
