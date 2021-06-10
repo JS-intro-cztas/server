@@ -17,7 +17,9 @@ router.get('', (req, res) => {
         res.status(400);
         res.end({ error: 'No such user', msg: 'Token not found' })
     }
-    res.end(JSON.stringify({ userData: storageService.storage.users[token] }));
+    setTimeout(() => {
+        res.end(JSON.stringify({ userData: storageService.storage.users[token] }));
+    }, 5000);
 });
 
 router.post('', (req, res) => {
