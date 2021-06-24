@@ -3,9 +3,7 @@ const router = require('express').Router();
 const data = {};
 
 router.get('', (req, res) => {
-    setTimeout(() => {
-        res.send(data);
-    }, 5000);
+    res.send(data);
 });
 
 router.post('', (req, res) => {
@@ -15,7 +13,7 @@ router.post('', (req, res) => {
     }
 
     const date = new Date(Date.parse(req.body.date));
-    const key = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
+    const key = createId(date);
     data[key] = req.body;
     setTimeout(() => {
         res.end();
