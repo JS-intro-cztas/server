@@ -13,7 +13,7 @@ router.post('', (req, res) => {
     }
 
     const date = new Date(Date.parse(req.body.date));
-    const key = createId(date);
+    const key = `${date.getFullYear()}/${date.getMonth() + 1}/${date.getDate()}`;
     data[key] = req.body;
     setTimeout(() => {
         res.end();
